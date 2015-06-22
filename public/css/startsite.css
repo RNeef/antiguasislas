@@ -1,0 +1,123 @@
+/* 
+    Created on : 19.06.2015, 03:30:41
+    Author     : Rolf
+*/
+body{
+    text-align: center;
+    font-family: Verdana, Arial, sans-serif;
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+}
+.mainarea{
+    z-index: 0;
+    background-image: url(../images/startsite/new_bg_map.jpg);
+    background-repeat: no-repeat;
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black; 
+    margin: 0 auto;
+}
+
+span{
+    z-index: 1;
+    display: inline-block;
+    width: 234px;
+    height: 100px;       
+}
+
+.first{
+    margin-left: 755px;
+    margin-top: 115px;
+    background-image: url(../images/startsite/start_button_1.png);
+}
+
+.second{
+    margin-left: 755px;
+    margin-top: 7px;
+    background-image: url(../images/startsite/start_button_2.png);
+}
+
+.third{
+    margin-left: 755px;
+    margin-top: 7px;
+    background-image: url(../images/startsite/start_button_3.png);
+}
+
+.fourth{
+    margin-left: 755px;
+    margin-top: 7px;
+    background-image: url(../images/startsite/start_button_5.png);
+}
+
+.regist{
+    color: #663D09;
+    z-index: 1;
+    margin: -51% auto;
+    width: 405px;
+    height: 500px;
+    background-image: url(../images/startsite/pergament.png);
+}
+
+h1{
+    position: relative;
+    top: 60px;
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 110px;
+}
+
+label{
+    float: left;
+    text-align: right;
+    width: 150px;
+    font-size: 13px;
+    margin-left: 5px;
+    width: 191px;
+}
+
+input{
+    border: 1px solid #663D09;
+    margin-left: -60px;
+    background-color: transparent;
+    width: 141px;
+}
+
+p{
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+button{
+    cursor: pointer;
+}
+
+.middle{
+    z-index: 3;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    border: 2px #000000 ridge;
+    background-color: burlywood;
+    font-size: 12px;
+    padding: 6px;
+    margin-left: 391px;
+    margin-top: 180px;
+}
+
+.worldcart{
+    position: absolute;
+    z-index: 1;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 195px;
+    height: 197px;
+}
+
+#closebutton{
+    position: relative;
+    left: 145px;
+    top: 9px;
+    cursor: pointer;
+}

@@ -1,0 +1,25 @@
+/* 
+    Created on : 22.06.2015, 14:18:39
+    Author     : Rolf
+*/
+
+#bar{
+  right: -207px;
+  position: relative;
+  z-index: 0;
+}
+
+.barbuttons{
+    z-index: 1;
+    position: relative;
+}
+
+#friends{
+    right: 300px;
+    top: 5px;
+}
+
+#avatar{
+    right: 467px;
+    top: 0px;
+}

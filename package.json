@@ -1,0 +1,28 @@
+{
+  "name": "antiguasislas",
+  "version": "0.0.1",
+  "description": "Surprise",
+  "main": "public/index.html",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "angular": "1.4.x",
+    "jquery": "^2.1.x",
+    "ng-file-upload": "^5.0.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjahn/antiguasislas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjahn/antiguasislas/issues"
+  },
+  "homepage": "https://github.com/mjahn/antiguasislas#readme"
+}

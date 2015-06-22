@@ -1,0 +1,265 @@
+body{
+    //background-color: #E8E2B8;
+    background-color: aliceblue;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-size: 11px;
+}
+
+#register{
+    position: absolute;
+    left: 50%;
+    width: 285px;
+    top: 40%;
+    z-index: 0;
+}
+
+.reg{
+    margin-bottom: 10px;
+    border: 1px solid green;
+    float: right;
+}
+
+.label{
+    margin-bottom: 10px;
+    width: 110px;
+    text-align: right;
+    float: left;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+.clearfloat{
+    clear: both;
+}
+
+#message{
+    position: absolute;
+    left: 50%;
+    width: 250px;
+    top: 40%;
+    z-index: 1;
+    background-color: #C2D8DB;
+    border: 2px groove black;
+    display: none;
+    text-align: center;
+}
+
+#message button{
+    margin-bottom: 10px;
+}
+
+legend{
+    text-align: left;
+    font-size: 14px;
+}
+
+h1{
+    position: absolute;
+    left: 50%;
+    width: 300px;
+    top: 20%;
+}
+
+.middle{
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+header, 
+section{
+    height: auto;
+    min-height: 150px;
+    float: right;
+}
+
+header{
+    border-bottom: 2px groove #444444; 
+}
+
+nav{
+    border-right: 2px groove #444444;
+    height: auto;
+    min-height: 200px;
+    width: 170px;
+    float:left;
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    padding-top: 200px;
+}
+
+.over{
+    list-style-image: none;
+    list-style-type: none;
+    font-weight: bold;
+    color: red;
+}
+
+.underlist{
+    display: none;
+}
+
+.underlistsee{
+    margin-left: 15px;
+    display: block; 
+    list-style-type: none;
+}
+
+.middleList{
+    background-image: url(../images/l_line2.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    list-style-type: none;
+    margin-left: -77px;
+    //border: 1px solid red;
+    padding-left: 25px;
+}
+.endList{
+    list-style-image: url(../images/l_line.png);
+}
+li{
+    cursor: pointer;
+}
+
+label{
+    width: 80px;
+    /* border: 1px red solid; */
+    display: block;
+    text-align: right;
+    float: left;
+    margin-top: 3px;
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.supFieldset{
+    margin: 15px;
+    width: 280px;
+}
+
+.inputSup{
+    margin-bottom: 8px;
+}
+
+#innermessage{
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    z-index: 1;
+    background-color: #C2D8DB;
+    border: 2px groove black;
+    display: block;
+    text-align: center;
+    min-height: 50px;
+    width: 265px;
+}
+
+.warning{
+    color: red;
+    background-image: url(../images/warning.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+.successfull{
+    color: green;
+    background-image: url(../images/success.png);
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+
+#messagetext{
+    width: 220px;
+    margin-left: 43px;
+}
+
+#innerclosebutton{
+    margin-bottom: 10px;
+}
+
+table, td, th{
+    border: 1px solid #000000;
+    border-collapse: collapse;
+    margin-left: -1px;
+}
+
+table{
+    margin-top: 15px;
+    margin-left: 15px;
+    float: left;
+    margin-right: 20px;
+}
+th{
+    display: inline-block;
+    font-weight: bold;
+    padding: 4px;
+    margin-top: -1px;
+    background-image: -webkit-linear-gradient(top bottom, white 0%, burlywood 100%); 
+    background-image: -moz-linear-gradient(top bottom, white 0%, burlywood 100%);
+    background-image: linear-gradient(white 0%, burlywood 100%);
+    background-image: -o-linear-gradient(white 0%, burlywood 100%);
+}
+td{
+    display: inline-block;
+    padding: 4px;
+      border-top: none;
+  margin-top: -6px;
+    padding-bottom: 7px;
+  padding-top: 14px;
+}
+
+td.center{
+    display: inline-block;
+    text-align: center;
+      border-top: none;
+  margin-top: -6px;
+    padding-bottom: 7px;
+  padding-top: 14px;
+}
+
+td.normal{
+    display: inline-block;
+    border-top: none;
+    margin-top: -6px;
+    padding-bottom: 7px;
+    padding-top: 14px;
+}
+td.image{
+    display: inline-block;
+    border-top: none;
+    margin-top: -6px;
+    padding-bottom: 2px;
+    padding-top: 14px;
+}
+.firstimage{
+    margin-left: 12px;
+    margin-right: 15px;
+}
+
+tr::first-line{
+    background-color: transparent;
+}
+tr:nth-child(odd) {
+    background-color: burlywood;
+}
+tr:nth-child(even) {
+    background-color: beige;
+}
+
+img{
+    cursor: pointer;
+}
+
+.scroll{
+    display: inline-block;
+    height: 500px;
+    overflow-y: scroll;         
+    overflow-x: hidden;
+}
+.newDataSet{
+    margin-top: 7px;
+    width: 300px;
+}
