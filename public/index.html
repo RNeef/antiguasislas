@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="css/startsite.css" media="screen"/>
         <link rel="stylesheet" href="css/game.css" media="screen"/>
     </head>
-    <body id="body">
+    <body id="body" data-ng-app="AntiguasIslas">
         <div class="mainarea" id="mainarea">
             <img src="images/startsite/Weltkompass.png" class="worldcart" alt=""/>
             <span class="first"><img src="images/startsite/registrieren.png" /></span>
@@ -17,6 +17,12 @@
             <span class="fourth"></span>
         </div>  
     </body>
-    <script src="javascript/jquery-1.11.3.min.js"></script>
-    <script src="javascript/startsite.js"></script>
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
+    <script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+
+    <script src="modules/AntiguasIslas.js"></script>
+    <script src="modules/services/NetworkService.js"></script>
+    <script src="modules/controller/ActivateUserController.js"></script>
 </html>

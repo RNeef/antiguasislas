@@ -1,3 +1,6 @@
+angular.module('AntiguasIslas').controller('ActivateUserController', function () {
+    
+});
 //alert(navigator.userAgent);
 var height = window.innerHeight;
 document.getElementsByTagName('body')[0].style.height = height - 20 + 'px';
