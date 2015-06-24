@@ -1,72 +1,75 @@
-angular.module('ngfin').service('NetworkService', [$http, $q, function ($http, $q) {
-    function errorHandler (oError) {
-        /*
-            if (typeof oError === 'string') {
-                // do something
+(function () {
+    'use strict';
+
+    angular.module('AntiguasIslas').service('NetworkService', ['$http', function ($http) {
+        var sUrlPrefix = '../server/webservices/',
+            bDebug = false;
+
+        function errorHandler(oError) {
+            if (bDebug) {
+                console.error(oError);
             }
-*/
-        return oError;
-    }
-
-    return {
-        post: function (sUrl, oData) {
-            var oPromise = $q.defer();
-
-            oPromise.notify('about to call the route ' + sUrl);
-
-            $http.post(sUrl, oData).success(function (oRespone) {
-                oPromise.resolve(oResponse);
-            }).errror(function (oError) {
-                oError = errorHandler(oError);
-                oPromise.reject(oError);
-            });
-
-            return oPromise.promise;
-        },
-
-        get: function (sUrl, oData) {
-            var oPromise = $q.defer();
-
-            oPromise.notify('about to call the route GET ' + sUrl);
-
-            $http.get(sUrl, oData).success(function (oRespone) {
-                oPromise.resolve(oResponse);
-            }).errror(function (oError) {
-                oError = errorHandler(oError);
-                oPromise.reject(oError);
-            });
-
-            return oPromise.promise;
-        },
-
-        put: function (sUrl, oData) {
-            var oPromise = $q.defer();
-
-            oPromise.notify('about to call the route PUT ' + sUrl);
-
-            $http.put(sUrl, oData).success(function (oRespone) {
-                oPromise.resolve(oResponse);
-            }).errror(function (oError) {
-                oError = errorHandler(oError);
-                oPromise.reject(oError);
-            });
-
-            return oPromise.promise;
-        },
-
-        delete: function (sUrl) {
-            var oPromise = $q.defer();
-
-            oPromise.notify('about to call the route DELETE ' + sUrl);
-
-            $http['delete'](sUrl).success(function (oRespone) {
-                oPromise.resolve(oResponse);
-            }).errror(function (oError) {
-                oError = errorHandler(oError);
-                oPromise.reject(oError);
-            });
-
-            return oPromise.promise;
+            return oError;
         }
-    };
-}]);
+
+        return {
+            config: function (sId, sValue) {
+                if (sId === 'url') {
+                    if (sValue === undefined) {
+                        return sUrlPrefix;
+                    }
+                    return sUrlPrefix = sValue;
+                }
+                if (sId === 'debug') {
+                    if (sValue === undefined) {
+                        return bDebug;
+                    }
+                    return bDebug = Boolean(sValue);
+                }
+            },
+            post: function (sUrl, oData) {
+                return new Promise(function (resove, reject) {
+                    $http.post(sUrlPrefix + sUrl, oData).success(function (oRespone) {
+                        resolve(oResponse);
+                    }).errror(function (oError) {
+                        oError = errorHandler(oError);
+                        reject(oError);
+                    });
+                });
+            },
+
+            get: function (sUrl, oData) {
+                return new Promise(function (resove, reject) {
+                    $http.get(sUrlPrefix + sUrl).success(function (oRespone) {
+                        resolve(oResponse);
+                    }).errror(function (oError) {
+                        oError = errorHandler(oError);
+                        reject(oError);
+                    });
+                });
+            },
+
+            put: function (sUrl, oData) {
+                return new Promise(function (resove, reject) {
+                    $http.put(sUrlPrefix + sUrl, oData).success(function (oRespone) {
+                        resolve(oResponse);
+                    }).errror(function (oError) {
+                        oError = errorHandler(oError);
+                        reject(oError);
+                    });
+                });
+            },
+
+            delete: function (sUrl) {
+                return new Promise(function (resove, reject) {
+                    $http['delete'](sUrlPrefix + sUrl).success(function (oRespone) {
+                        resolve(oResponse);
+                    }).errror(function (oError) {
+                        oError = errorHandler(oError);
+                        reject(oError);
+                    });
+                });
+            }
+        };
+    }]);
+})();

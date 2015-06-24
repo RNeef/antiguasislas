@@ -1,1 +1,6 @@
-angular.module('AntiguasIslas', ['ngFileUpload']);
+(function () {
+	'use strict';
+	
+	angular.module('AntiguasIslas', ['ngFileUpload', 'ngDialog']);
+
+})();

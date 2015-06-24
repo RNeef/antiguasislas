@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -9,20 +8,37 @@
         <link rel="stylesheet" href="css/game.css" media="screen"/>
     </head>
     <body id="body" data-ng-app="AntiguasIslas">
-        <div class="mainarea" id="mainarea">
-            <img src="images/startsite/Weltkompass.png" class="worldcart" alt=""/>
-            <span class="first"><img src="images/startsite/registrieren.png" /></span>
-            <span class="second"></span>
-            <span class="third"></span>
-            <span class="fourth"></span>
-        </div>  
+        <div class="game">
+            <header class="topbar">
+            </header>
+            <main class="main">
+                <div class="compass">
+                </div>
+                <div class="map">
+                </div>
+            </main>
+            <aside class="sidebar" data-ng-controller="StartPageController">
+                <nav>
+                    <ul>
+                        <li><button type="button" value="register">Registrieren</button></li>
+                        <li><button type="button" value="login">Anmelden</button></li>
+                        <li><button type="button" value="register">Registrieren</button></li>
+                        <li><button type="button" value="register">Registrieren</button></li>
+                    </ul>
+                </nav>
+            </aside>
+        </div>
     </body>
+    <script src="../node_modules/bluebird/js/browser/bluebird.min.js"></script>
     <script src="../node_modules/angular/angular.min.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/ng-dialog/js/ngDialog.min.js"></script>
     <script src="../node_modules/ng-file-upload/dist/ng-file-upload-shim.min.js"></script>
     <script src="../node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
-
     <script src="app/AntiguasIslas.js"></script>
     <script src="app/services/NetworkService.js"></script>
-    <script src="app/controller/ActivateUserController.js"></script>
+    <script src="app/services/UserService.js"></script>
+    <script src="app/controller/StartPageController.js"></script>
+    <script src="app/controller/RegisterController.js"></script>
+    <script src="app/controller/MapController.js"></script>
 </html>
