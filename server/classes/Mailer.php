@@ -65,6 +65,7 @@ class Mailer {
 		}
 		
 		$this->packHeaders();
+                
 		$sent = mail($this->to, $this->subject, $this->textMessage, $this->headers);
 		if(!$sent) {
 			$errorMessage = "Server couldn't send the email.";
@@ -121,6 +122,7 @@ class Mailer {
 	private function packHeaders() {
             if (!$this->headers) {
                     $this->headers = "MIME-Version: 1.0" . PHP_EOL;
+                    $this->headers .= "Content-Type: text/html; charset=utf-8" . PHP_EOL;
                     $this->headers .= "To: " . $this->recipients . PHP_EOL;
                     $this->headers .= "From: " . $this->from . PHP_EOL;
 
@@ -189,14 +191,14 @@ class Mailer {
 			} else {
 				$pos = strpos($this->textMessage, "<html>");
 				if ($pos === false) {
-					$headers .= "Content-Type: text/plain; charset=\"utf-8\"" . PHP_EOL;
-					$headers .= "Content-Transfer-Encoding: 7bit";
+					$this->headers.= "Content-Type: text/plain; charset=utf-8" . PHP_EOL;
+//					$headers .= "Content-Transfer-Encoding: 7bit";
 					$str .= $this->textMessage . PHP_EOL;
 				}
 				
 				if ($pos === 0) {
-					$headers .= "Content-Type: text/html; charset=\"utf-8\"" . PHP_EOL;
-					$headers .= "Content-Transfer-Encoding: 7bit";
+//					$this->headers.= "Content-Type: text/html; charset=utf-8" . PHP_EOL;
+//					$headers .= "Content-Transfer-Encoding: 7bit";
 					$str .= $this->textMessage . PHP_EOL;
 				}
 				

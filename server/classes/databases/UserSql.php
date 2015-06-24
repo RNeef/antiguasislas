@@ -21,6 +21,15 @@ class UserSql {
         
     }
     
+    /**
+     * Holt alle Usernamen und deren Mailadresse aus der Datenbank, um vergleichen zu können
+     * ob es diesen Usernamen vergeben ist oder die Mailadresse schon in der Datenbank steht
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * 
+     * @return Array
+     */
     public function GetAllUser(){
     
         $aResult = array();
@@ -61,6 +70,14 @@ class UserSql {
         
     }
     
+    /**
+     * Trägt einen neuen User in die Datenbank
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param Array $aUserDatas
+     * @return Array
+     */
     public function SaveNewUser($aUserDatas){
         
         $sDate = date('Y-m-d H:i:s', time());
@@ -149,6 +166,15 @@ class UserSql {
  
     }
     
+    /**
+     * Der User wird mittels eines Hashs aktiviert, eine Sicherung gegenüber
+     * Mail mißbrauch
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param String $sHash
+     * @return Array
+     */
     public function ActivateUser($sHash){
  
         $iCount = 0;
@@ -200,6 +226,14 @@ class UserSql {
             
     }
     
+    /**
+     * Der Spieler loggt sich ein und alle wichtige Daten werden geholt
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param Array $aUserData
+     * @return Array
+     */
     public function LoginUser($aUserData){
 
         $sQuery = '
@@ -211,7 +245,7 @@ class UserSql {
             FROM
                 `users`
             WHERE
-                `name` = :name
+                BINARY `name` = :name
             AND
                 `password` = :password';
                 
@@ -244,14 +278,67 @@ class UserSql {
         }else{
             return array(
                     'success' => 'false',
-                    'message' => 'Sie haben hier keinen Account.'
+                    'message' => 'Fehleingabe, überprüfe deinen Nick und Passwort.'
             );
         }
         
     }
     
+    /**
+     * Hier werden alle weiteren Spielerdate geholt die wichtig sind
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param Integer $iUserId
+     * @return Array Useedatas
+     */
     private function FetchAllUserDatas($iUserId){
         
         
+    }
+    
+    /**
+     * Ein neues Passwort wird für den Spieler gespeichert
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param Array $aUserData
+     * @return Array
+     */
+    public function UpdatePassword($aUserData){
+        
+        $sQuery = '
+            UPDATE
+                `users`
+            SET
+                `password` = :password
+            WHERE
+                `mail` = :mail';
+        
+        $rHandler = $this->oDatabase->prepare($sQuery);
+        
+        $rHandler->bindParam(':password', $aUserData['password'], PDO::PARAM_STR);
+        $rHandler->bindParam(':mail', $aUserData['mail'], PDO::PARAM_STR);
+        
+        $this->oDatabase->beginTransaction();
+        try{
+            
+            $rHandler->execute();
+            
+            $this->oDatabase->commit();
+
+        }catch(Exception $e){
+            
+            $this->oDatabase->rollback();
+            return array(
+                'success' => 'false',
+                'message' => 'Leider ist ein Fehler aufgetreten, versuchen sie es zu einem späteren Zeizpunkt noch mal.'
+            );
+        }
+        
+        return array(
+            'success' => 'true',
+            'message' => 'Sie haben ein neues Passwort erhalten und haben eine Mail erhalten.'
+        );
     }
 }

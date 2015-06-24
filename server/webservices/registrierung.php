@@ -34,6 +34,10 @@
             $aResult = $oUser->LoginUser($_POST);
             break;
         
+        case 'newpw':
+            $aResult = $oUser->SetNewPassword($_POST);
+            break;
+        
         default:
             $aResult = array(
                 'success' => 'false',

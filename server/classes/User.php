@@ -8,8 +8,7 @@ class User {
     
     private $oDatabase = null;
     private $aResultArray = array();
-    private $sRegisterText = '';
-    private $sForgottText = '';
+    private $sMailText = '';
     private $sPassword = '';
     
     public function __construct($oDatabse) {
@@ -21,7 +20,7 @@ class User {
     /**
      * Prüft ob es diesen Namen und EMail - Adresse schon in der Datenbank gibt
      * 
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onlinehome.de
      * @param String $sName
      * @param String $sMail
@@ -69,8 +68,12 @@ class User {
     }
     
     /**
-     * Der Neue Account wird hier Aktiviert
+     * Der Neue Account wird hier Aktiviert.
      * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param String $sHash der Hash der per Mail verschickt wurde
+     * @return Array Meldung am User
      */
     public function ActivateAccount($sHash){
         
@@ -88,7 +91,7 @@ class User {
      * Prüft ob die Mail korrekt geschrieben wurde ud es die Domain für Mails
      * überhaupt gibt
      * 
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onlinehome.de
      * @param String $sMail
      * @return Array
@@ -124,9 +127,9 @@ class User {
     /**
      * Sendet eine Mail zu User
      * 
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onliehome.de
-     * @param String $sMail
+     * @param String $sMail Mail-Adresse des Users
      * @return Array
      */
     public function SendMail($sMail){
@@ -136,7 +139,7 @@ class User {
 	$oMail->setFrom("AI - Browsergame", "noreply@ai.de");
 	$oMail->addRecipient('You', $sMail);
 	$oMail->fillSubject("Deine Registrierung");
-	$oMail->fillMessage($this->sRegisterText);
+	$oMail->fillMessage($this->sMailText);
         
         $oMail->send();
 
@@ -150,7 +153,7 @@ class User {
      * Hier werden die eingegebene Daten des Users bearbeitet und zu den prüfenden
      * Methoden weiter gegeben, ist alles in Ordnung wird in die Datenbank geschrieben.
      * 
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onlinehome.de
      * @param Array $aRegisterDatas
      * @return Array
@@ -195,6 +198,14 @@ class User {
         
     }
     
+    /**
+     * Spieler logt sich ins Spiel ein
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param Array $aUserData
+     * @return Array
+     */
     public function LoginUser($aUserData){
         
         $oUserSql = new UserSql($this->oDatabase);
@@ -206,7 +217,7 @@ class User {
             }
         }
         
-        $aUserData['password'] = $this->ConvertWord($aUserData['password'], 'passwort');
+        $aUserData['password'] = $this->ConvertWord($aUserData['password'], 'password');
         
         $aResult = $oUserSql->LoginUser($aUserData);
         
@@ -217,7 +228,7 @@ class User {
     /**
      * Erstell aus dem übergebenen Wort ein verschlüsselten String der nicht 
      *  
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onlinehome.de
      * @param String $sWord
      * @param String $sOrigin
@@ -244,7 +255,7 @@ class User {
     /**
      * Baut den Mail-Text der Registrierung zusammen
      * 
-     * @version 1.0
+     * @version 1.0.0
      * @author Rolf Neef rolf.neef@onlinehome.de
      * @param String $sUsername
      * @param String $sHash
@@ -252,23 +263,31 @@ class User {
      */
     private function CreateMailText($sUsername, $sHash){
         
-        $sLink = $_SERVER['HTTP_HOST'].'/activate.html?action='.$sHash;
+        $sLink = 'http://www.'. $_SERVER['HTTP_HOST']. '/activate.html?action='.$sHash;
         $sSpielname = 'AI';
         
-        $this->sRegisterText = '<html>Hallo '. $sUsername .',<p>
+        $this->sMailText = '<html>Hallo '. $sUsername .',<p>
                 vielen Dank für Deine Regristierung. Wir freuen uns Dich als neues Mitglied in unserem Spiel begrüßen zu dürfen.</p>
-                <p>Für die endgültige Registrierung musst Du nur auf den Link klicken.</p>
-                <p><a href="'. $sLink .'" /></p>
+                <p>Für die endgültige Regristierung musst Du nur auf den Link klicken.</p>
+                <p><a href="'. $sLink .'">'. $sLink .'</a></p>
                 <p>Danach kannst du Dich mit deinem Benutzernamen und Passwort einloggen und die Welt von ' . $sSpielname . ' einsteigen</p>
-                <p>Wenn die aktivierung nicht innerhalb von 24 Stunde erfolgt werden die Daten gelöscht.</p>
+                <p>Wenn die Aktivierung nicht innerhalb von 24 Stunden erfolgt werden die Daten gelöscht.</p>
                 <p>Ebenso wenn du diese Mail unberechtigter Weise erhalten hast.</p>
                 <p>Eine Antwort auf diese Mail-Adresse hat keine Wirkung</p>
                 <p></p>
                 <p>Lieben Gruß</p>
-                <p>Dein'. $sSpielname .'Team</html>';
+                <p>Dein '. $sSpielname .' Team</html>';
     }
     
-    private function SetNewPassword(){
+    /**
+     * Setzt ein neues Passwort zusammen, rein auf Zufall, wird in einer private
+     * Variable gespeichert
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * return void
+     */
+    private function SetRandomPassword(){
         
         $iCounter = 0;
         $sString = '';
@@ -282,6 +301,51 @@ class User {
         }
         
         $this->sPassword = $this->ConvertWord($sString, 'password');
+        
+    }
+    
+    /**
+     * Baut den Mail-Text bei vergessen des Passworts zusammen
+     * 
+     * @version 1.0.0
+     * @author Rolf Neef rolf.neef@onlinehome.de
+     * @param String $sName UserNick
+     * return void
+     */
+    private function CreatePasswordText(){
+        
+        $this->sMailText;
+        
+    }
+    
+    public function SetNewPassword($aUserDatas){
+        
+        $aResult = $this->CheckMailAdress($aUserDatas['mail']);
+        
+        if($aResult['success'] === 'false'){
+            return $aResult;
+        }
+        
+        if($aUserDatas['action'] === 'newpw'){
+         
+            $this->SetRandomPassword();
+        
+            $aUserDatas['password'] = $this->sPassword;
+        
+        }
+        
+        $oUserDataBase = new UserSql($this->oDatabase);
+        
+        $aResult = $oUserDataBase->UpdatePassword($aUserDatas);
+        
+        if($aResult['success'] === 'true'){
+            
+            $this->CreatePasswordText();
+                    
+            $this->SendMail($aUserDatas['mail']);
+        }
+        
+        return $aResult;
         
     }
 }
